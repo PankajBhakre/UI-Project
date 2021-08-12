@@ -1,0 +1,19 @@
+#heading{
+    text-align: center;
+}
+
+form{
+    background: #d9eeec;
+    padding: 80px;
+}
+mat-form-field{
+    width:200px;
+    padding:10px;
+}
+mat-radio-button{
+width:150px;
+}
+
+.error-msg{
+    color: red;
+}

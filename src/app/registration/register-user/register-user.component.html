@@ -1,0 +1,190 @@
+<div class="container">
+<mat-card>
+    <mat-toolbar color="accent">
+        <div id="heading" style="color:white;text-align:center">
+            Registration Page
+        </div>
+    </mat-toolbar>
+    <br><br>
+    <form [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+        <mat-card-content>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-9 col-xl-9">
+                        <div class="row">
+                            <mat-radio-group matTooltip="Enter Register Type" formControlName="RegType">
+                                <mat-radio-button value="Admin">Admin</mat-radio-button>
+                                <mat-radio-button value="Recruiter">Recruiter</mat-radio-button>
+                                <mat-radio-button value="Seeker">Seeker</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <mat-form-field  class="demo-full-width">
+                                    <input matInput matTooltip="Enter First Name" placeholder="Enter First Name" formControlName="FirstName">
+                                    <mat-error *ngIf="checkError('FirstName', 'required')">First Name is required </mat-error>
+                                    <mat-error *ngIf="checkError('FirstName', 'minlength')">First Name must be greater than 3 letters </mat-error> 
+                                </mat-form-field>
+                                <!-- <mat-error>
+                                    <span *ngIf="!registerForm.get('FirstName').value && registerForm.get('FirstName').touched">
+                                        First Name is required
+                                    </span>
+                                </mat-error> -->
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                 <mat-form-field class="demo-full-width">
+                                    <input matInput matTooltip="Enter Last Name" placeholder="Enter Last Name" formControlName="LastName">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!registerForm.get('LastName').value && registerForm.get('LastName').touched">Enter Last Name</span>
+                                  </mat-error>
+                                
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3">
+                            <input type="file">
+                            <img [src]="imageUrl" width="100px" height="100px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                          <mat-form-field class="col-sm-10">
+                            <input matTooltip="Email id" matInput placeholder="EmailId" formControlName="EmailId">
+                          </mat-form-field>
+                          <mat-error>
+                            <span *ngIf="!registerForm.get('EmailId').value && registerForm.get('EmailId').touched">Enter Email id</span>  
+                          </mat-error>
+                        </div>
+                  
+                        <div class="col-sm-4 form-group">
+                          <mat-form-field class="col-sm-10">
+                            <input matTooltip="Enter user name" matInput placeholder="User Name" formControlName="UserName"  (change)="CheckUserName($event.target.value)">
+                          </mat-form-field>
+                          <mat-error>
+                            <span *ngIf="this.userNameAvailable">User name already available</span>  
+                          </mat-error>
+                        </div>
+                  
+                        <div class="col-sm-4 form-group">
+                          <mat-form-field class="col-sm-10">
+                            <input matTooltip="Personal No" maxlength="12" acceptnumber matInput placeholder="Personal Number" formControlName="PersonalNumber">
+                          </mat-form-field>
+                          <mat-error>
+                              <span *ngIf="!registerForm.get('PersonalNumber').value && registerForm.get('PersonalNumber').touched">Enter Personal Number</span>  
+                            </mat-error>
+                        </div>
+                      </div>
+                  
+                      <div class="row">
+                        <div class="col-sm-4 form-group">
+                          <mat-form-field class="demo-full-width">
+                            <textarea matTooltip="Address" matInput placeholder="Address" formControlName="Address"></textarea>
+                          </mat-form-field>
+                          <mat-error>
+                            <span *ngIf="!registerForm.get('Address').value && registerForm.get('Address').touched">Enter Adress</span>  
+                          </mat-error>
+                        </div>
+                  
+                        <div class="col-sm-4 form-group">
+                          <mat-form-field class="demo-full-width">
+                            <input matTooltip="Pine Code" acceptnumber maxlength="6" matInput placeholder="Pine Code" formControlName="PinCode">
+                          </mat-form-field>
+                          <mat-error>
+                            <span *ngIf="!registerForm.get('PinCode').value && registerForm.get('PinCode').touched">Enter pine code</span>  
+                          </mat-error>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                          <mat-form-field class="demo-full-width">
+                            <input matInput [matDatepicker]="picker" matTooltip="Enter Date Of Birth"
+                              placeholder="Choose Date Of Birth" formControlName="DateOfBirth">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                          <mat-error>
+                            <span *ngIf="!registerForm.get('DateOfBirth').value && registerForm.get('DateOfBirth').touched">Enter birth date</span>  
+                          </mat-error>
+                        </div>
+                      </div>
+                </div>
+                    
+                    <div class="row">
+                      <div class="col-sm-4 form-group fields-container">
+                        <mat-form-field>
+                          <mat-label>Country</mat-label>
+                          <mat-select matInput (selectionChange)="BindState($event.value)" formControlName="CountryId" >
+                            <mat-option *ngFor="let item of Country" [value]="item.CountryId">
+                              {{item.CountryName}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-error>
+                            <span *ngIf="!registerForm.get('CountryId').value && registerForm.get('CountryId').touched">Select country</span>  
+                          </mat-error>
+                      </div>
+                      <div class="col-sm-4 form-group">
+                        <mat-form-field>
+                          <mat-label>State</mat-label>
+                          <mat-select matInput (selectionChange)="BindCity($event.value)"  formControlName="StateId">
+                            <mat-option *ngFor="let item of State" [value]="item.StateId">
+                              {{item.StateName}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-error>
+                            <span *ngIf="!registerForm.get('StateId').value && registerForm.get('StateId').touched">Select State</span>  
+                          </mat-error>
+                      </div>
+                      <div class="col-sm-4 form-group">
+                        <mat-form-field>
+                          <mat-label>City</mat-label>
+                          <mat-select matInput  formControlName="CityId">
+                            <mat-option *ngFor="let item of City"  [value]="item.CityId" >
+                              {{item.CityName}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-error>
+                            <span *ngIf="!registerForm.get('CityId').value && registerForm.get('CityId').touched">Select City</span>  
+                          </mat-error>
+                      </div>
+                    </div>
+                  
+                    <div class="row">
+                      <div class="col-sm-4 form-group">
+                        <mat-form-field class="demo-full-width">
+                          <input type="password" matTooltip="Enter Password" matInput placeholder="password" formControlName="Password">
+                        </mat-form-field>
+                        <mat-error>
+                          <span *ngIf="!registerForm.get('Password').value && registerForm.get('Password').touched ">Enter password</span>
+                        </mat-error>
+                      </div>
+                      <div class="col-sm-4 form-group">
+                        <mat-form-field class="demo-full-width">
+                          <input type="password" matTooltip="Re-Enter Password" matInput placeholder="Confirm Password" formControlName="ConfPassword">
+                        </mat-form-field>
+                        <mat-error>
+                          <span *ngIf="!registerForm.get('ConfPassword').value && registerForm.get('ConfPassword').touched">Re-Enter password</span>
+                        </mat-error>
+                        
+                        <div class="error-msg" *ngIf="registerForm.get('Password').value !== registerForm.get('ConfPassword').value">Passwords don't match.</div>
+                      </div>
+                      <div class="col-sm-4 form-group">
+                        <mat-radio-group matTooltip="Select Gender" formControlName="Gender">
+                          <mat-radio-button value="male">Male</mat-radio-button>
+                          <mat-radio-button value="female">Female</mat-radio-button>
+                        </mat-radio-group>
+                        <mat-error>
+                          <span *ngIf="!registerForm.get('Gender').value && registerForm.get('Gender').touched">Select Gender</span>
+                        </mat-error>
+                      </div>
+                    </div>
+                    <div>
+                        <button type="submit" [disabled]="!registerForm.valid" mat-raised-button color="accent" matTooltip="Click Submit Button">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button" (click)="resetForm()">Reset</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" mat-raised-button color="accent" matTooltip="Click Login Button" (click)="loginForm()">Login</button>
+                      </div>
+        </mat-card-content>
+    </form>
+</mat-card>
+</div>
