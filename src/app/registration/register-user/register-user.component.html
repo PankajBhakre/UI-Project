@@ -43,7 +43,7 @@
                         </div>
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3">
-                            <input type="file">
+                            <input type="file" (change)="onSelectFile($event.target.files)">
                             <img [src]="imageUrl" width="100px" height="100px">
                         </div>
                     </div>
@@ -88,10 +88,10 @@
                   
                         <div class="col-sm-4 form-group">
                           <mat-form-field class="demo-full-width">
-                            <input matTooltip="Pine Code" acceptnumber maxlength="6" matInput placeholder="Pine Code" formControlName="PinCode">
+                            <input matTooltip="Pin Code"  acceptnumber maxlength="6" matInput placeholder="Pin Code" formControlName="PinCode">
                           </mat-form-field>
                           <mat-error>
-                            <span *ngIf="!registerForm.get('PinCode').value && registerForm.get('PinCode').touched">Enter pine code</span>  
+                            <span *ngIf="!registerForm.get('PinCode').value && registerForm.get('PinCode').touched">Enter pin code</span>  
                           </mat-error>
                         </div>
                         <div class="col-sm-4 form-group">

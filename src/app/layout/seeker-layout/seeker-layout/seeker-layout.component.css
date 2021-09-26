@@ -1,0 +1,43 @@
+#wrapper {
+    width: 99%;
+    background-color:#021E38;
+    color: white;
+
+  }
+  #page-wrapper {
+    padding: 35px;
+    min-height: 730px;
+    background-color: white;
+    color: black;
+  }
+  @media (min-width: 768px) {
+    #page-wrapper {
+      position: inherit;
+      border-left: 1px solid #e7e7e7;
+    }
+  }
+
+  ul{
+      padding: 10px;
+  }
+
+li{
+    width: 220px;
+    border-radius: 10px;
+    color: white;
+}
+li>a{
+    color: white;
+    border: 1px solid #021E38;
+}
+li>a:hover{
+color: black;
+border: 1px solid #021E38;
+}
+li>a:focus{
+  color: black;
+  }
+#verticle-menu
+{
+    padding-left: 10px;
+}

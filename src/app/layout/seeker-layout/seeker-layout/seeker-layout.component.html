@@ -1,0 +1,52 @@
+
+<div id="wrapper" >
+    <div style="height: 60px;" class="row" >
+        <div  class="col-md-9"><h1 style="font-family:'Courier New', Courier, monospace;font-weight:bold">Job Portal</h1></div>
+      <div class="col-md-3" >
+        <ul class="nav" style="position: absolute;"  id="header-menu">
+          <li style="width: 200px;padding: 10px;">
+           <b>Welcome : {{userName}}</b>
+          </li>
+          <li style="width: 100px">
+            <a [routerLink]="['/SeekerLogout']"><i class="fa fa-edit fa-fw"></i>Logout</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.sidebar-collapse -->
+    </div>
+    <div class="row">
+   
+      <div class="col-md-2" style="padding-left: 5px;">
+        <br><br>
+          <ul class="nav" id="verticle-menu">
+            <li>
+              <a [routerLink]="['/Seeker/JobListDetails']"><i class="fa fa-home fa-fw"></i>&nbsp;&nbsp;Job Details</a>
+            </li>
+              <li>
+                <a [routerLink]="['/Seeker/UserProfile']"><i class="fa fa-user-md fa-fw"></i>&nbsp;&nbsp;Profile Details</a>
+              </li>
+              <li>
+                <a ><i class="fa fa-address-card fa-fw"></i>&nbsp;&nbsp;Update Education</a>
+              </li>
+              <li>
+                  <a ><i class="fa fa-user-circle fa-fw"></i>&nbsp;&nbsp;Compeny Details</a>
+                </li>
+                <li>
+                  <a><i class="fa fa-user-circle fa-fw"></i>&nbsp;&nbsp;Professional Details</a>
+                </li>
+          
+                <li>
+                  <a ><i class="fa fa-key fa-fw"></i>&nbsp;&nbsp;Change Paasword</a>
+                </li>
+            </ul>
+      </div>
+      <div class="col-md-10">
+          <div id="page-wrapper">
+              <div class="row">                           
+                  <router-outlet></router-outlet>
+                </div>            
+            </div>
+      </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">

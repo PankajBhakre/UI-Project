@@ -1,0 +1,10 @@
+.verify{
+height: 70%;
+margin:100px ;
+padding:150px;
+border:2px solid green;
+box-shadow:yellow 2px inset;
+border-radius:10px;
+text-align: center;
+}
+
